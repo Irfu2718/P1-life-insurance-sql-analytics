@@ -1,1 +1,506 @@
+-- Create database
+create database pas ;
+
+-- Use database
+use pas ;
+
+-- Table 1 - Customer
+
+CREATE TABLE Customer
+(
+Customer_ID INT PRIMARY KEY,
+Customer_Name VARCHAR(100) NOT NULL,
+Gender CHAR(1),
+DOB DATE,
+City VARCHAR(50),
+Occupation VARCHAR(50)
+);
+-- *****************************************************************************************
+-- Table 2 - Branch
+
+CREATE TABLE Branch
+(
+Branch_ID INT PRIMARY KEY,
+Branch_Name VARCHAR(100),
+City VARCHAR(50)
+);
+-- *****************************************************************************************
+-- Table 3 - Agent
+CREATE TABLE Agent
+(
+Agent_ID INT PRIMARY KEY,
+Agent_Name VARCHAR(100),
+Branch_ID INT,
+Joining_Date DATE,
+FOREIGN KEY (Branch_ID)
+REFERENCES Branch(Branch_ID)
+);
+
+-- *****************************************************************************************
+-- Table 4 - Policy
+CREATE TABLE Policy
+(
+Policy_ID INT PRIMARY KEY,
+Customer_ID INT,
+Agent_ID INT,
+
+Policy_Type VARCHAR(30),
+
+Premium DECIMAL(12,2),
+
+Sum_Assured DECIMAL(15,2),
+
+Policy_Date DATE,
+
+Status VARCHAR(20),
+
+FOREIGN KEY(Customer_ID)
+REFERENCES Customer(Customer_ID),
+
+FOREIGN KEY(Agent_ID)
+REFERENCES Agent(Agent_ID)
+
+);
+
+-- *****************************************************************************************
+
+-- Table 5 - Premium_Payment
+CREATE TABLE Premium_Payment
+(
+Payment_ID INT PRIMARY KEY,
+
+Policy_ID INT,
+
+Payment_Date DATE,
+
+Amount DECIMAL(12,2),
+
+Payment_Mode VARCHAR(30),
+
+FOREIGN KEY(Policy_ID)
+REFERENCES Policy(Policy_ID)
+
+);
+
+-- *****************************************************************************************
+-- Table 6 - Claim
+CREATE TABLE Claim
+(
+Claim_ID INT PRIMARY KEY,
+
+Policy_ID INT,
+
+Claim_Date DATE,
+
+Claim_Amount DECIMAL(12,2),
+
+Status VARCHAR(20),
+
+FOREIGN KEY(Policy_ID)
+REFERENCES Policy(Policy_ID)
+
+);
+
+-- *****************************************************************************************
+-- Table 7 - Nominee
+
+CREATE TABLE Nominee
+(
+Nominee_ID INT PRIMARY KEY,
+
+Policy_ID INT,
+
+Nominee_Name VARCHAR(100),
+
+Relation VARCHAR(30),
+
+FOREIGN KEY(Policy_ID)
+REFERENCES Policy(Policy_ID)
+
+);
+
+-- *****************************************************************************************
+-- *****************************************************************************************
+-- *****************************************************************************************
+
+
+-- insert data inro tables
+
+-- Table 1 - Branch
+
+INSERT INTO Branch (Branch_ID, Branch_Name, City)
+VALUES
+(101,'Pune Main Branch','Pune'),
+(102,'Mumbai Central Branch','Mumbai'),
+(103,'Bangalore Branch','Bangalore'),
+(104,'Hyderabad Branch','Hyderabad'),
+(105,'Delhi NCR Branch','Delhi');
+
+-- *****************************************************************************************
+
+-- Table 2 - Agent
+
+INSERT INTO Agent
+(Agent_ID,Agent_Name,Branch_ID,Joining_Date)
+VALUES
+(201,'Rahul Sharma',101,'2019-01-15'),
+(202,'Priya Patil',101,'2020-05-20'),
+(203,'Amit Verma',102,'2018-08-11'),
+(204,'Sneha Kulkarni',102,'2021-02-14'),
+(205,'Rakesh Singh',103,'2017-09-18'),
+(206,'Anjali Mehta',103,'2022-04-10'),
+(207,'Mohit Joshi',104,'2020-11-05'),
+(208,'Pooja Nair',104,'2023-01-25'),
+(209,'Vikas Gupta',105,'2019-06-30'),
+(210,'Neha Jain',105,'2024-02-12');
+
+-- *****************************************************************************************
+
+-- Table 3 - Customer
+
+INSERT INTO Customer
+(Customer_ID,Customer_Name,Gender,DOB,City,Occupation)
+VALUES
+(1001,'Amit Sharma','M','1988-05-12','Pune','Software Engineer'),
+(1002,'Anita Patil','F','1992-08-18','Pune','Teacher'),
+(1003,'Rahul Verma','M','1985-03-25','Mumbai','Doctor'),
+(1004,'Sneha Kulkarni','F','1990-12-11','Mumbai','Chartered Accountant'),
+(1005,'Vikas Gupta','M','1984-06-09','Delhi','Businessman'),
+(1006,'Priya Nair','F','1995-09-20','Hyderabad','HR Manager'),
+(1007,'Mohit Joshi','M','1989-11-14','Bangalore','Data Analyst'),
+(1008,'Pooja Singh','F','1993-07-22','Pune','Bank Officer'),
+(1009,'Ajay Deshmukh','M','1986-01-19','Pune','Civil Engineer'),
+(1010,'Neha Jain','F','1991-02-27','Delhi','Lawyer'),
+(1011,'Arjun Mehta','M','1987-10-15','Mumbai','Marketing Manager'),
+(1012,'Kiran Rao','F','1994-04-17','Bangalore','Software Engineer'),
+(1013,'Rohit Pawar','M','1983-08-30','Pune','Farmer'),
+(1014,'Swati Patil','F','1992-06-11','Hyderabad','Nurse'),
+(1015,'Deepak Shah','M','1980-12-28','Delhi','Businessman'),
+(1016,'Komal Joshi','F','1996-01-05','Mumbai','Student'),
+(1017,'Sandeep Kumar','M','1988-09-18','Bangalore','Architect'),
+(1018,'Asha Kulkarni','F','1985-05-03','Pune','Professor'),
+(1019,'Nitin Sharma','M','1990-07-16','Delhi','Police Officer'),
+(1020,'Meena Patil','F','1989-11-23','Hyderabad','Government Employee'),
+(1021,'Akash Gupta','M','1994-03-08','Mumbai','Sales Executive'),
+(1022,'Ritu Singh','F','1993-12-19','Bangalore','Graphic Designer'),
+(1023,'Ganesh More','M','1987-04-26','Pune','Insurance Advisor'),
+(1024,'Sonali Desai','F','1991-09-09','Mumbai','Consultant'),
+(1025,'Abhishek Jadhav','M','1986-02-13','Pune','Mechanical Engineer');
+
+-- *****************************************************************************************
+
+-- Table 4 - Policy
+
+INSERT INTO Policy
+(Policy_ID, Customer_ID, Agent_ID, Policy_Type, Premium, Sum_Assured, Policy_Date, Status)
+VALUES
+(5001,1001,201,'Term',18000,1000000,'2021-01-15','Active'),
+(5002,1002,202,'ULIP',35000,1500000,'2021-03-20','Active'),
+(5003,1003,203,'Endowment',22000,1200000,'2021-05-12','Lapsed'),
+(5004,1004,204,'Money Back',28000,1000000,'2021-07-18','Active'),
+(5005,1005,209,'Term',16000,900000,'2021-09-10','Matured'),
+(5006,1006,207,'Child Plan',40000,1800000,'2021-11-05','Active'),
+(5007,1007,205,'Pension',30000,1400000,'2022-01-25','Active'),
+(5008,1008,201,'ULIP',45000,2000000,'2022-02-14','Active'),
+(5009,1009,202,'Endowment',24000,1100000,'2022-03-30','Lapsed'),
+(5010,1010,209,'Term',15000,800000,'2022-04-22','Surrendered'),
+
+(5011,1011,203,'Money Back',26000,1200000,'2022-05-15','Active'),
+(5012,1012,205,'ULIP',55000,2500000,'2022-06-18','Active'),
+(5013,1013,206,'Term',12000,700000,'2022-07-20','Lapsed'),
+(5014,1014,207,'Child Plan',38000,1600000,'2022-08-25','Active'),
+(5015,1015,210,'Pension',32000,1500000,'2022-09-18','Active'),
+(5016,1016,204,'Endowment',21000,950000,'2022-10-10','Matured'),
+(5017,1017,205,'ULIP',62000,3000000,'2022-11-16','Active'),
+(5018,1018,206,'Money Back',27000,1250000,'2022-12-05','Active'),
+(5019,1019,209,'Term',17000,900000,'2023-01-14','Lapsed'),
+(5020,1020,208,'Child Plan',39000,1700000,'2023-02-08','Active'),
+
+(5021,1021,203,'ULIP',48000,2200000,'2023-03-18','Active'),
+(5022,1022,205,'Endowment',25000,1150000,'2023-04-12','Active'),
+(5023,1023,201,'Money Back',29000,1300000,'2023-05-20','Active'),
+(5024,1024,204,'Term',19000,950000,'2023-06-15','Surrendered'),
+(5025,1025,210,'Pension',34000,1550000,'2023-07-11','Active'),
+(5026,1001,202,'ULIP',52000,2600000,'2023-08-05','Active'),
+(5027,1003,203,'Child Plan',41000,1800000,'2023-09-18','Active'),
+(5028,1005,209,'Endowment',23000,1100000,'2023-10-22','Matured'),
+(5029,1007,205,'Term',14000,850000,'2023-11-19','Active'),
+(5030,1009,206,'ULIP',60000,2800000,'2023-12-27','Active'),
+
+(5031,1011,203,'Pension',33000,1600000,'2024-01-18','Active'),
+(5032,1013,205,'Money Back',31000,1450000,'2024-02-25','Active'),
+(5033,1015,210,'ULIP',70000,3500000,'2024-03-12','Active'),
+(5034,1017,205,'Endowment',26000,1200000,'2024-04-08','Lapsed'),
+(5035,1019,209,'Term',18000,950000,'2024-05-21','Active'),
+(5036,1021,203,'Child Plan',43000,1900000,'2024-06-16','Active'),
+(5037,1023,201,'ULIP',80000,4000000,'2024-07-10','Active'),
+(5038,1025,210,'Money Back',30000,1350000,'2024-08-14','Active'),
+(5039,1002,202,'Term',13000,750000,'2024-09-09','Active'),
+(5040,1004,204,'Endowment',27000,1250000,'2024-10-05','Active');
+
+-- *****************************************************************************************
+
+-- Table 5 Premium_Payment
+
+INSERT INTO Premium_Payment
+(Payment_ID, Policy_ID, Payment_Date, Amount, Payment_Mode)
+VALUES
+(9001,5001,'2022-01-15',18000,'UPI'),
+(9002,5001,'2023-01-15',18000,'Net Banking'),
+(9003,5001,'2024-01-15',18000,'ECS'),
+
+(9004,5002,'2022-03-20',35000,'Cheque'),
+(9005,5002,'2023-03-20',35000,'UPI'),
+(9006,5002,'2024-03-20',35000,'Credit Card'),
+
+(9007,5003,'2022-05-12',22000,'ECS'),
+(9008,5003,'2023-05-12',22000,'UPI'),
+
+(9009,5004,'2022-07-18',28000,'Debit Card'),
+(9010,5004,'2023-07-18',28000,'UPI'),
+(9011,5004,'2024-07-18',28000,'Net Banking'),
+
+(9012,5005,'2022-09-10',16000,'Cheque'),
+(9013,5005,'2023-09-10',16000,'UPI'),
+
+(9014,5006,'2022-11-05',40000,'ECS'),
+(9015,5006,'2023-11-05',40000,'Credit Card'),
+(9016,5006,'2024-11-05',40000,'UPI'),
+
+(9017,5007,'2023-01-25',30000,'UPI'),
+(9018,5007,'2024-01-25',30000,'Net Banking'),
+
+(9019,5008,'2023-02-14',45000,'Cheque'),
+(9020,5008,'2024-02-14',45000,'UPI'),
+
+(9021,5009,'2023-03-30',24000,'Debit Card'),
+(9022,5009,'2024-03-30',24000,'UPI'),
+
+(9023,5010,'2023-04-22',15000,'ECS'),
+
+(9024,5011,'2023-05-15',26000,'UPI'),
+(9025,5011,'2024-05-15',26000,'Credit Card'),
+
+(9026,5012,'2023-06-18',55000,'Net Banking'),
+(9027,5012,'2024-06-18',55000,'UPI'),
+
+(9028,5013,'2023-07-20',12000,'Cheque'),
+
+(9029,5014,'2023-08-25',38000,'UPI'),
+(9030,5014,'2024-08-25',38000,'Debit Card'),
+
+(9031,5015,'2023-09-18',32000,'Net Banking'),
+(9032,5015,'2024-09-18',32000,'UPI'),
+
+(9033,5016,'2023-10-10',21000,'Cheque'),
+
+(9034,5017,'2023-11-16',62000,'UPI'),
+(9035,5017,'2024-11-16',62000,'Credit Card'),
+
+(9036,5018,'2023-12-05',27000,'Debit Card'),
+(9037,5018,'2024-12-05',27000,'UPI'),
+
+(9038,5019,'2024-01-14',17000,'ECS'),
+
+(9039,5020,'2024-02-08',39000,'UPI'),
+(9040,5020,'2025-02-08',39000,'Net Banking'),
+(9041,5021,'2024-03-18',48000,'UPI'),
+(9042,5021,'2025-03-18',48000,'Net Banking'),
+
+(9043,5022,'2024-04-12',25000,'ECS'),
+(9044,5022,'2025-04-12',25000,'UPI'),
+
+(9045,5023,'2024-05-20',29000,'Cheque'),
+(9046,5023,'2025-05-20',29000,'UPI'),
+
+(9047,5024,'2024-06-15',19000,'Debit Card'),
+
+(9048,5025,'2024-07-11',34000,'UPI'),
+(9049,5025,'2025-07-11',34000,'Credit Card'),
+
+(9050,5026,'2024-08-05',52000,'Net Banking'),
+(9051,5026,'2025-08-05',52000,'UPI'),
+
+(9052,5027,'2024-09-18',41000,'ECS'),
+(9053,5027,'2025-09-18',41000,'UPI'),
+
+(9054,5028,'2024-10-22',23000,'Cheque'),
+
+(9055,5029,'2024-11-19',14000,'UPI'),
+(9056,5029,'2025-11-19',14000,'Debit Card'),
+
+(9057,5030,'2024-12-27',60000,'Credit Card'),
+(9058,5030,'2025-12-27',60000,'UPI'),
+
+(9059,5031,'2025-01-18',33000,'Net Banking'),
+
+(9060,5032,'2025-02-25',31000,'UPI'),
+
+(9061,5033,'2025-03-12',70000,'Credit Card'),
+
+(9062,5034,'2025-04-08',26000,'Cheque'),
+
+(9063,5035,'2025-05-21',18000,'UPI'),
+
+(9064,5036,'2025-06-16',43000,'Net Banking'),
+
+(9065,5037,'2025-07-10',80000,'Credit Card'),
+
+(9066,5038,'2025-08-14',30000,'UPI'),
+
+(9067,5039,'2025-09-09',13000,'Debit Card'),
+
+(9068,5040,'2025-10-05',27000,'Cheque'),
+
+(9069,5002,'2025-03-20',35000,'UPI'),
+
+(9070,5004,'2025-07-18',28000,'Net Banking'),
+
+(9071,5006,'2025-11-05',40000,'UPI'),
+
+(9072,5008,'2025-02-14',45000,'Credit Card'),
+
+(9073,5012,'2025-06-18',55000,'UPI'),
+
+(9074,5014,'2025-08-25',38000,'Cheque'),
+
+(9075,5015,'2025-09-18',32000,'Debit Card'),
+
+(9076,5017,'2025-11-16',62000,'Net Banking'),
+
+(9077,5020,'2025-02-08',39000,'UPI'),
+
+(9078,5021,'2026-03-18',48000,'Cheque'),
+
+(9079,5025,'2026-07-11',34000,'UPI'),
+
+(9080,5033,'2026-03-12',70000,'Net Banking'),
+(9081,5001,'2025-01-15',18000,'UPI'),
+(9082,5007,'2025-01-25',30000,'ECS'),
+(9083,5011,'2025-05-15',26000,'Debit Card'),
+(9084,5018,'2025-12-05',27000,'Net Banking'),
+(9085,5022,'2026-04-12',25000,'UPI'),
+(9086,5023,'2026-05-20',29000,'Credit Card'),
+(9087,5026,'2026-08-05',52000,'ECS'),
+(9088,5027,'2026-09-18',41000,'Net Banking'),
+(9089,5029,'2026-11-19',14000,'UPI'),
+(9090,5030,'2026-12-27',60000,'Cheque'),
+
+(9091,5031,'2026-01-18',33000,'UPI'),
+(9092,5032,'2026-02-25',31000,'Debit Card'),
+(9093,5034,'2026-04-08',26000,'Net Banking'),
+(9094,5035,'2026-05-21',18000,'UPI'),
+(9095,5036,'2026-06-16',43000,'Cheque'),
+(9096,5037,'2026-07-10',80000,'Credit Card'),
+(9097,5038,'2026-08-14',30000,'UPI'),
+(9098,5039,'2026-09-09',13000,'ECS'),
+(9099,5040,'2026-10-05',27000,'Debit Card'),
+(9100,5002,'2026-03-20',35000,'Net Banking'),
+
+(9101,5004,'2026-07-18',28000,'UPI'),
+(9102,5006,'2026-11-05',40000,'Cheque'),
+(9103,5008,'2026-02-14',45000,'Net Banking'),
+(9104,5012,'2026-06-18',55000,'UPI'),
+(9105,5014,'2026-08-25',38000,'Credit Card'),
+(9106,5015,'2026-09-18',32000,'ECS'),
+(9107,5017,'2026-11-16',62000,'UPI'),
+(9108,5020,'2026-02-08',39000,'Cheque'),
+(9109,5021,'2026-03-18',48000,'Debit Card'),
+(9110,5025,'2026-07-11',34000,'Net Banking'),
+
+(9111,5001,'2026-01-15',18000,'UPI'),
+(9112,5005,'2024-09-10',16000,'Cheque'),
+(9113,5009,'2025-03-30',24000,'UPI'),
+(9114,5010,'2024-04-22',15000,'ECS'),
+(9115,5013,'2024-07-20',12000,'Cheque'),
+(9116,5016,'2024-10-10',21000,'UPI'),
+(9117,5019,'2025-01-14',17000,'Debit Card'),
+(9118,5024,'2025-06-15',19000,'Net Banking'),
+(9119,5028,'2025-10-22',23000,'UPI'),
+(9120,5033,'2026-09-12',70000,'Credit Card');
+
+-- *****************************************************************************************
+
+-- Table 6 claim
+
+INSERT INTO Claim
+(Claim_ID, Policy_ID, Claim_Date, Claim_Amount, Status)
+VALUES
+(7001,5001,'2023-06-15',350000,'Approved'),
+(7002,5003,'2023-09-10',450000,'Approved'),
+(7003,5005,'2024-01-18',800000,'Approved'),
+(7004,5006,'2024-03-25',250000,'Rejected'),
+(7005,5008,'2024-05-12',600000,'Approved'),
+(7006,5010,'2024-06-30',150000,'Pending'),
+(7007,5012,'2024-08-05',700000,'Approved'),
+(7008,5014,'2024-09-15',300000,'Approved'),
+(7009,5017,'2024-11-20',950000,'Approved'),
+(7010,5020,'2025-01-10',500000,'Pending'),
+(7011,5023,'2025-02-14',400000,'Approved'),
+(7012,5025,'2025-04-28',550000,'Approved'),
+(7013,5027,'2025-06-18',200000,'Rejected'),
+(7014,5030,'2025-08-22',1200000,'Approved'),
+(7015,5033,'2025-10-16',900000,'Approved'),
+(7016,5035,'2026-01-05',275000,'Pending'),
+(7017,5037,'2026-03-19',1500000,'Approved'),
+(7018,5040,'2026-05-30',325000,'Approved');
+
+-- *****************************************************************************************
+
+-- Table 7 Nominee
+
+INSERT INTO Nominee
+(Nominee_ID, Policy_ID, Nominee_Name, Relation)
+VALUES
+(8001,5001,'Sunita Sharma','Wife'),
+(8002,5002,'Rajesh Patil','Husband'),
+(8003,5003,'Pooja Verma','Wife'),
+(8004,5004,'Aarav Kulkarni','Son'),
+(8005,5005,'Anita Gupta','Wife'),
+(8006,5006,'Rohan Nair','Son'),
+(8007,5007,'Kavita Singh','Wife'),
+(8008,5008,'Priya Singh','Daughter'),
+
+-- 5009 intentionally left without nominee
+
+(8009,5010,'Amit Jain','Husband'),
+(8010,5011,'Neha Mehta','Wife'),
+(8011,5012,'Riya Rao','Daughter'),
+
+-- 5013 intentionally left without nominee
+
+(8012,5014,'Anil Patil','Husband'),
+(8013,5015,'Meera Shah','Wife'),
+(8014,5016,'Vivek Joshi','Brother'),
+(8015,5017,'Sneha Kumar','Wife'),
+(8016,5018,'Aditi Kulkarni','Daughter'),
+
+-- 5019 intentionally left without nominee
+
+(8017,5020,'Karan Patil','Son'),
+(8018,5021,'Anita Gupta','Mother'),
+(8019,5022,'Rahul Singh','Brother'),
+(8020,5023,'Sanjana More','Wife'),
+(8021,5024,'Nikhil Desai','Husband'),
+(8022,5025,'Pooja Jadhav','Wife'),
+(8023,5026,'Aryan Sharma','Son'),
+(8024,5027,'Komal Verma','Wife'),
+
+-- 5028 intentionally left without nominee
+
+(8025,5029,'Deepa Joshi','Mother'),
+(8026,5030,'Aditi Deshmukh','Daughter'),
+(8027,5031,'Rohit Mehta','Son'),
+(8028,5032,'Swati Pawar','Wife'),
+(8029,5033,'Ananya Shah','Daughter'),
+(8030,5034,'Kiran Gupta','Brother'),
+(8031,5035,'Meena Sharma','Wife'),
+(8032,5036,'Suresh Gupta','Father'),
+(8033,5037,'Ritika More','Daughter'),
+
+-- 5038 intentionally left without nominee
+
+(8034,5039,'Ramesh Patil','Father'),
+(8035,5040,'Shreya Kulkarni','Daughter');
+
 
