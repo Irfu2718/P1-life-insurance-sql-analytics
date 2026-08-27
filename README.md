@@ -28,12 +28,14 @@ These three steps together help us create the complete database environment.
 
 I have provided the complete project materials You can download the project files which  including the database scripts, data, questions, solutions, and other project materials.
 
-You simply need to copy the queries from uploaded file where file name is "Code_For_Paste_Mysql_workbench" and file format is text .
-Or copy as it is queries from "README" and paste into MySQL Workbench  read each comment carefully, and run the queries step by step.
+You simply need to copy the queries from uploaded file where file name is "Code_For_Paste_Mysql_workbench" 
+Or copy as it is queries and paste it into MySQL Workbench then read each comment carefully and run the queries step by step.
 
 Once you complete these steps, your database will be created with all the required tables and data. This completes the raw data creation stage.
 
 Now, we need to practice SQL on this database, and that is the main reason I created this project.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 I have noticed that many people have theoretical knowledge of SQL but lack practical experience in working with actual datasets and solving business-related problems.
 Therefore, I have created 300 SQL questions related to this Life Insurance database, along with the SQL code that can be used to solve them. I have also provided the expected answers and outputs so that you can practice independently and validate your results.
