@@ -14,6 +14,7 @@ In the first step, we created a database named PAS (Policy Administrative System
 
 Step 2 – Creating Tables
 In the second step, we created several tables, such as:
+
 🔹 Customer 🔹 Policy 🔹 Agent 🔹 Branch 🔹 Premium Payment 🔹 Claims 🔹 Nominee
 
 Step 3 – Inserting Data into the Tables
