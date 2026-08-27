@@ -7,6 +7,8 @@ This is a practical Life Insurance SQL Analytics Project with a PAS database, a 
 
 The main purpose of this project is to help SQL beginners who want to upgrade their skills and gradually progress to an advanced level. This project provides an end-to-end data analysis environment, where I have created the database, created the required tables, and inserted the data into those tables.
 
+-------------------------------------------------------------------------------------------------------------------------------------------
+
 I have divided the project into three main steps:
 
 Step 1 – Creating the Database
@@ -19,6 +21,8 @@ In the second step, we created several tables, such as:
 
 Step 3 – Inserting Data into the Tables
 we inserted data into each table according to its structure and purpose.
+
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 These three steps together help us create the complete database environment.
 
@@ -33,6 +37,8 @@ Now, we need to practice SQL on this database, and that is the main reason I cre
 
 I have noticed that many people have theoretical knowledge of SQL but lack practical experience in working with actual datasets and solving business-related problems.
 Therefore, I have created 300 SQL questions related to this Life Insurance database, along with the SQL code that can be used to solve them. I have also provided the expected answers and outputs so that you can practice independently and validate your results.
+
+------------------------------------------------------------------------------------------------------------------------------------------
 
 Through these exercises, you can learn how SQL can be used for:
 
@@ -51,6 +57,8 @@ Through these exercises, you can learn how SQL can be used for:
 📌 Advanced Data Analysis – Use CTEs, subqueries, aggregate functions, CASE statements, and Window Functions to perform more advanced analysis.
 
 🎯 Real-World Business Data – Gain practical experience working with a structured dataset that represents a Life Insurance business environment rather than practicing only on simple sample tables.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
 This will help you strengthen your DQL (Data Query Language) skills and give you practical experience with SQL commands.
 The objective is not just to learn how to write a SQL query, but to understand why the query is required, what business problem it solves, and how the output can be interpreted.
@@ -147,4 +155,4 @@ Business-oriented Life Insurance scenarios
 
 ======================================================================================== Contact for more Information =========================================================================================
 
-============================================================================================= Irfan Shaikh - 8411945544 =========================================================================================
+============================================================================================ Irfan Shaikh - 8411945544 =========================================================================================
